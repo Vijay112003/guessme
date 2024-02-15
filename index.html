@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess the Number</title>
-  <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -25,50 +24,31 @@
     <div id="clue" class="text-center"></div><br>
     <div id="result" class="text-center"></div>
   </div>
-
-  <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- Game Logic -->
   <script>
-    // Function to generate an array of possible factors of a given number
     function getPossibleFactors(number) {
-        // Initialize an empty array to store factors
         const factors = [];
-
-        // Loop from 1 up to the square root of the number
         for (let i = 1; i <= Math.sqrt(number); i++) {
-            // If 'i' is a factor of 'number', push it to the factors array
             if (number % i === 0) {
                 factors.push(i);
-                // If the corresponding factor is not equal to 'number/i', push 'number/i' to the factors array
                 if (number / i !== i) {
                     factors.push(number / i);
                 }
             }
         }
-
-        // Sort the factors array in ascending order
         factors.sort((a, b) => a - b);
-
-        // Return the array of factors
+        factors.pop();
         return factors;
     }
-
-    // Generate a random number between min and max
     function getRandomNumber(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
-    // Initialize the game
     const minNumber = 1;
     const maxNumber = 100;
     let secretNumber = getRandomNumber(minNumber, maxNumber);
     let attempts = 0;
-
-    // Function to handle guess
     function handleGuess() {
       const userGuess = parseInt(document.getElementById('userGuess').value);
       const factors = getPossibleFactors(secretNumber);
@@ -89,8 +69,6 @@
         document.getElementById('result').innerHTML = 'Too high. Try again.';
       }
     }
-
-    // Event listener for guess button click
     document.getElementById('guessButton').addEventListener('click', handleGuess);
   </script>
 </body>
